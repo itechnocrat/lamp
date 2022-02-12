@@ -2,15 +2,15 @@
 
 ### Версия PHP
 
-Узнать, какая версия уже установлена в системе:
+Узнать, какая версия PHP установлена в системе:
 
 ```sh
 php -v
 ```
 
-Установить значение системной переменной равной версии PHP.
+Установить значение системной переменной равной версии PHP,
 
-Например: для версии 8.1.2, значение для переменной будет 8.1:
+например, для версии 8.1.2, значение для переменной будет 8.1:
 
 ```sh
 version='8.1'
@@ -19,8 +19,8 @@ version='8.1'
 ### Создание резервных копий конфигурационных файлов PHP
 
 ```sh
-cp /etc/php/${version}/apache2/php.ini /etc/phpV/apache2/php.ini.buckup
-cp /etc/php/${version}/cli/php.ini /etc/phpV/cli/php.ini.buckup
+cp /etc/php/${version}/apache2/php.ini /etc/php/${version}/apache2/php.ini.backup
+cp /etc/php/${version}/cli/php.ini /etc/php/${version}/cli/php.ini.backup
 ```
 
 ### Настройка PHP

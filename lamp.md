@@ -6,7 +6,6 @@
 
 ```sh
 sudo -i
-#tasksel remove lamp-server
 systemctl stop mysql
 systemctl stop apache2
 rm -rf /etc/apache2
@@ -58,7 +57,7 @@ add-apt-repository -y ppa:ondrej/php
 ### Подготовка к установке MySQL
 
 Это конфигуратор MySQL.  
-В конфигураторе пункты меню должны выглядет так, как на [картинке](https://macrodmin.ru/wp-content/uploads/2018/11/Configure-MySQL-APT-Config.png), но третий пункт тоже должен быть `Enabled`.
+В конфигураторе пункты меню должны выглядет так, как на [картинке](https://macrodmin.ru/wp-content/uploads/2018/11/Configure-MySQL-APT-Config.png), **но третий пункт тоже должен быть** `Enabled`.
 
 ```sh
 cd /tmp
@@ -74,14 +73,14 @@ apt update -y && apt upgrade -y
 apt --install-suggests -y install apache2 php php-mysql libapache2-mod-php mysql-server
 ```
 
-### Во время установки будут вопросы программы-установщика
+### Вопросы программы-установщика
 
 1. Нужно будет задать пароль администратора для MySQL, для учебных целей он может быть любым и его необходимо запомнить.
 Чтобы отличать его от других паролей, пусть будет `r00t`, это `r` `два нуля` и `t`.
 
-2. Во втором вопросе следует выбрать `Use Strong Password Encryption (RECOMMENDED)`.
+2. Во втором вопросе следует выбрать пункт `Use Strong Password Encryption (RECOMMENDED)`.
 
-3. Если будут еще вопросы, то выбирать вариант `install the package maintainer's version`, т.в. вводить `Y` и жать `Enter`.
+3. Если будут еще вопросы, то выбирать вариант `install the package maintainer's version`, т.е. вводить `Y` (большой игрек) и жать `Enter`.
 
 ### Последний штрих
 
@@ -114,10 +113,13 @@ php -v
 
 ### Проверка работы Apache и PHP вместе
 
-Создать файл `/var/www/index.php`, для этого скормить в консоль следующий блок команд:
+Создать файл `/var/www/index.php`, для этого скормить в консоль следующий блок команд в сеансе `root`:
 
 ```sh
 sudo -i
+```
+
+```sh
 cat << EOF > /var/www/html/index.php
 <?php phpinfo(); ?>
 EOF
@@ -162,7 +164,7 @@ vi /etc/apache2/mods-enabled/dir.conf
 </IfModule>
 ```
 
-Перезапустить Apache:
+Перезагрузить конфигурацию Apache:
 
 ```sh
 sudo -i
