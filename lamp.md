@@ -8,15 +8,15 @@
 sudo -i
 systemctl stop mysql
 systemctl stop apache2
+apt purge mysql-server*
+apt purge php*
+apt purge apache*
 rm -rf /etc/apache2
 rm -rf /etc/mysql
 rm -rf /etc/php
 rm -rf /var/lib/apache2
 rm -rf /var/lib/mysql
 rm -rf /var/lib/php
-apt purge mysql-server*
-apt purge php*
-apt purge apache*
 apt update -y && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean -y && apt clean -y
 ```
 
