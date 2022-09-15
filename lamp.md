@@ -2,7 +2,7 @@
 
 ## Linux Apache MySQL PHP
 
-### Сначала удалить весь AMP:
+### Сначала удалить весь AMP
 
 ```sh
 sudo -i
@@ -11,11 +11,12 @@ systemctl stop apache2
 apt purge mysql-server*
 apt purge php*
 apt purge apache*
-rm -rf /etc/apache2
-rm -rf /etc/mysql
-rm -rf /etc/php
+# rm -rf /etc/apache2
+# rm -rf /etc/mysql
+# rm -rf /etc/php
 rm -rf /var/lib/apache2
 rm -rf /var/lib/mysql
+rm -rf /var/log/mysql
 rm -rf /var/lib/php
 apt update -y && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean -y && apt clean -y
 ```
@@ -57,11 +58,16 @@ add-apt-repository -y ppa:ondrej/php
 ### Подготовка к установке MySQL
 
 Это конфигуратор MySQL.  
-В конфигураторе пункты меню должны выглядет так, как на [картинке](https://macrodmin.ru/wp-content/uploads/2018/11/Configure-MySQL-APT-Config.png), **но третий пункт тоже должен быть** `Enabled`.
+В конфигураторе пункты меню должны выглядеть так, как на [картинке](https://macrodmin.ru/wp-content/uploads/2018/11/Configure-MySQL-APT-Config.png), **но третий пункт тоже должен быть** `Enabled`.
 
 ```sh
 cd /tmp
 wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+```
+
+[just start my download](https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb)
+
+```sh
 sudo dpkg -i ./mysql-apt-config_0.8.22-1_all.deb
 rm ./mysql-apt-config*.deb
 apt update -y && apt upgrade -y
@@ -142,14 +148,14 @@ cat /var/www/html/index.php
 
 ### Немного тюнинга для Apache
 
-1. В файле `/etc/apache2/conf-available/charset.conf` убрать символ `#` перед `AddDefaultCharset UTF-8`:
+1 В файле `/etc/apache2/conf-available/charset.conf` убрать символ `#` перед `AddDefaultCharset UTF-8`:
 
 ```sh
 sudo -i
 vi /etc/apache2/conf-available/charset.conf
 ```
 
-2. В файле `/etc/apache2/mods-enabled/dir.conf`, в директиве `DirectoryIndex`, первым значением должно быть `index.php`:
+2 В файле `/etc/apache2/mods-enabled/dir.conf`, в директиве `DirectoryIndex`, первым значением должно быть `index.php`:
 
 ```sh
 sudo -i
@@ -171,7 +177,7 @@ sudo -i
 systemctl reload apache2
 ```
 
-Теперь в адресной строке веб-браузера необязательно указывать полный путь к файлу `index.php` на сервере, а достаточно ввести `localhost`
+Теперь в адресной строке веб-браузера необязательно указывать полный путь к файлу `index.php` на сервере, а достаточно ввести `localhost`.
 
 Перейти по адресу [http://localhost/](http://localhost/)
 
@@ -190,3 +196,4 @@ systemctl reload apache2
 [Как установить стек LAMP (Apache, MySQL, PHP) на Ubuntu 20.04](https://timeweb.com/ru/community/articles/kak-ustanovit-stek-lamp-na-ubuntu-20-04?utm_medium=affilate&utm_source=admitad&utm_campaign=admitad-virtual-hosting&admitad_uid=84543c8414c2ed545da19f88364c3fce)  
 [Установка LAMP-стека (Linux, Apache, MySQL, PHP) на Ubuntu](https://selectel.ru/blog/lamp-install-ubuntu/)  
 [How to Install PHP 8 on Ubuntu 20.04](https://linuxize.com/post/how-to-install-php-8-on-ubuntu-20-04/)  
+[How to Configure MYSQL on DreamCompute running Debian or Ubuntu](https://help.dreamhost.com/hc/en-us/articles/215879487-How-to-Configure-MYSQL-on-DreamCompute-running-Debian-or-Ubuntu)  
