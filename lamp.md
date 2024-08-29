@@ -6,18 +6,18 @@
 
 ```sh
 sudo -i
-systemctl stop mysql
-systemctl stop apache2
-apt purge mysql-server*
-apt purge php*
+systemctl stop mysql && \
+systemctl stop apache2 && \
+apt purge mysql-server* && \
+apt purge php* && \
 apt purge apache*
 # rm -rf /etc/apache2
 # rm -rf /etc/mysql
 # rm -rf /etc/php
-rm -rf /var/lib/apache2
-rm -rf /var/lib/mysql
-rm -rf /var/log/mysql
-rm -rf /var/lib/php
+rm -rf /var/lib/apache2 && \
+rm -rf /var/lib/mysql && \
+rm -rf /var/log/mysql && \
+rm -rf /var/lib/php && \
 apt update -y && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt autoclean -y && apt clean -y
 ```
 
@@ -50,8 +50,8 @@ ufw enable
 
 ```sh
 sudo -i
-apt install -y software-properties-common
-add-apt-repository -y ppa:ondrej/apache2
+apt install -y software-properties-common && \
+add-apt-repository -y ppa:ondrej/apache2 && \
 add-apt-repository -y ppa:ondrej/php
 ```
 
@@ -60,15 +60,21 @@ add-apt-repository -y ppa:ondrej/php
 Это конфигуратор MySQL.  
 В конфигураторе пункты меню должны выглядеть так, как на [картинке](https://macrodmin.ru/wp-content/uploads/2018/11/Configure-MySQL-APT-Config.png), **но третий пункт тоже должен быть** `Enabled`.
 
+Сначала задать для установки версию MySQL:
+
 ```sh
-cd /tmp
-wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+MYSQL_VERSION=0.8.22-1
 ```
 
-[just start my download](https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb)
+```sh
+cd /tmp
+wget -c https://dev.mysql.com/get/mysql-apt-config_$MYSQL_VERSION_all.deb
+```
+
+[just start download](https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb)
 
 ```sh
-sudo dpkg -i ./mysql-apt-config_0.8.22-1_all.deb
+sudo dpkg -i ./mysql-apt-config_$MYSQL_VERSION_all.deb
 rm ./mysql-apt-config*.deb
 apt update -y && apt upgrade -y
 ```
